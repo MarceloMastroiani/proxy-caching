@@ -1,99 +1,176 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🚀 Servidor Proxy con Caché
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Servidor proxy HTTP con sistema de caché inteligente construido con NestJS.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## ✨ ¿Qué hace?
 
-## Description
+- **Proxy HTTP**: Reenvía peticiones a un servidor de origen
+- **Sistema de Caché**: Guarda respuestas GET para mejorar el rendimiento
+- **Headers Informativos**: `X-Cache: HIT` (desde caché) o `X-Cache: MISS` (desde servidor)
+- **CLI Simple**: Comandos fáciles de usar
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
+## 📦 Instalación
 
 ```bash
-$ pnpm install
+# Instalar dependencias
+pnpm install
+
+# Construir el proyecto
+pnpm run build
 ```
 
-## Compile and run the project
+## 🚀 Uso
+
+### Iniciar el Proxy
 
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+node dist/cli.js --port 3000 --origin http://dummyjson.com
 ```
 
-## Run tests
+### Hacer Peticiones
 
 ```bash
-# unit tests
-$ pnpm run test
+# Primera petición (consulta el servidor)
+curl http://localhost:3000/products
+# X-Cache: MISS
 
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+# Segunda petición (viene de caché)
+curl http://localhost:3000/products
+# X-Cache: HIT ⚡
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Limpiar Caché
 
 ```bash
-$ pnpm install -g mau
-$ mau deploy
+node dist/cli.js --clear-cache
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 📊 Endpoints Especiales
 
-## Resources
+```bash
+# Ver estadísticas de caché
+curl http://localhost:3000/__cache-stats
 
-Check out a few resources that may come in handy when working with NestJS:
+# Limpiar caché via HTTP
+curl http://localhost:3000/__clear-cache
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## ⚙️ Configuración
 
-## Support
+### Variables de Entorno
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Crea un archivo `.env`:
 
-## Stay in touch
+```env
+PORT=3003
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Personalizar Caché
 
-## License
+Edita `src/proxy-server/proxy-server.service.ts`:
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```typescript
+private readonly cache = new NodeCache({
+  stdTTL: 600,        // 10 minutos
+  checkperiod: 120,   // Verificar cada 2 minutos
+});
+```
+
+## 📝 Comandos
+
+```bash
+# Desarrollo
+pnpm run start:dev
+
+# Producción
+pnpm run build
+pnpm run start:prod
+
+# Linter
+pnpm run lint
+
+# Tests
+pnpm run test
+```
+
+## 🔧 Opciones CLI
+
+| Opción          | Alias | Descripción                |
+| --------------- | ----- | -------------------------- |
+| `--port`        | `-p`  | Puerto del servidor proxy  |
+| `--origin`      | `-o`  | URL del servidor de origen |
+| `--clear-cache` | `-c`  | Limpiar caché              |
+| `--help`        | `-h`  | Mostrar ayuda              |
+
+## 📂 Estructura
+
+```
+src/
+├── proxy-server/
+│   ├── proxy-server.controller.ts  # Maneja peticiones HTTP
+│   ├── proxy-server.service.ts     # Lógica de caché
+│   └── entities/                   # Interfaces
+├── config/
+│   └── envs.ts                     # Configuración de entorno
+├── cli.ts                          # CLI del proxy
+└── main.ts                         # Aplicación NestJS
+```
+
+## 💡 Ejemplos
+
+### Ejemplo 1: API de productos
+
+```bash
+# Iniciar proxy
+node dist/cli.js --port 3000 --origin http://dummyjson.com
+
+# Obtener productos
+curl http://localhost:3000/products
+```
+
+### Ejemplo 2: Con query params
+
+```bash
+curl "http://localhost:3000/products?limit=5"
+```
+
+### Ejemplo 3: Ver estadísticas
+
+```bash
+curl http://localhost:3000/__cache-stats | jq
+```
+
+## 🐛 Solución de Problemas
+
+### Puerto en uso
+
+```bash
+# Error: EADDRINUSE
+# Solución: Usa otro puerto
+node dist/cli.js --port 3001 --origin http://dummyjson.com
+```
+
+### URL inválida
+
+```bash
+# ❌ Incorrecto
+--origin dummyjson.com
+
+# ✅ Correcto
+--origin http://dummyjson.com
+```
+
+## 🛠️ Tecnologías
+
+- **NestJS** - Framework backend
+- **Axios** - Cliente HTTP
+- **node-cache** - Sistema de caché en memoria
+- **TypeScript** - Lenguaje tipado
+
+## 📄 Licencia
+
+MIT
+
+---
+
+**¿Necesitas ayuda?** Abre un issue en GitHub o revisa la documentación de NestJS.
