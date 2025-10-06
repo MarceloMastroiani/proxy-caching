@@ -40,15 +40,15 @@ function parseArgs(): { port?: number; origin?: string; clearCache: boolean } {
 
 function showHelp() {
   console.log(`
-╔════════════════════════════════════════════════════════════════╗
-║           🚀 Servidor Proxy con Caché - NestJS               ║
-╚════════════════════════════════════════════════════════════════╝
+=================================================================
+          🚀 Servidor Proxy con Caché - NestJS                
+=================================================================
 
 📋 USO:
   caching-proxy --port <número> --origin <url>
   caching-proxy --clear-cache
 
-⚙️  OPCIONES:
+⚙️ OPCIONES:
   --port, -p        Puerto en el que se ejecutará el servidor proxy
   --origin, -o      URL del servidor de origen
   --clear-cache, -c Limpiar la caché del proxy
@@ -60,7 +60,7 @@ function showHelp() {
   caching-proxy --clear-cache
 
 🔗 DOCUMENTACIÓN:
-  https://github.com/tu-usuario/caching-proxy
+  https://github.com/MarceloMastroiani/proxy-caching
   `);
 }
 
@@ -125,13 +125,11 @@ async function main() {
 
     console.log('');
     logger.log(
-      '╔════════════════════════════════════════════════════════════════╗',
+      '════════════════════════════════════════════════════════════════',
     );
+    logger.log('     🚀 Servidor Proxy con Caché iniciado exitosamente       ');
     logger.log(
-      '║     🚀 Servidor Proxy con Caché iniciado exitosamente       ║',
-    );
-    logger.log(
-      '╚════════════════════════════════════════════════════════════════╝',
+      '════════════════════════════════════════════════════════════════',
     );
     logger.log('');
     logger.log(`🌐 Servidor local:        http://localhost:${argv.port}`);

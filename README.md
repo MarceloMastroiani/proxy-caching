@@ -1,15 +1,15 @@
-# 🚀 Servidor Proxy con Caché
+# Servidor Proxy con Caché
 
 Servidor proxy HTTP con sistema de caché inteligente construido con NestJS.
 
-## ✨ ¿Qué hace?
+## ¿Qué hace?
 
 - **Proxy HTTP**: Reenvía peticiones a un servidor de origen
 - **Sistema de Caché**: Guarda respuestas GET para mejorar el rendimiento
 - **Headers Informativos**: `X-Cache: HIT` (desde caché) o `X-Cache: MISS` (desde servidor)
 - **CLI Simple**: Comandos fáciles de usar
 
-## 📦 Instalación
+## Instalación
 
 ```bash
 # Instalar dependencias
@@ -19,7 +19,7 @@ pnpm install
 pnpm run build
 ```
 
-## 🚀 Uso
+## Uso
 
 ### Iniciar el Proxy
 
@@ -36,7 +36,7 @@ curl http://localhost:3000/products
 
 # Segunda petición (viene de caché)
 curl http://localhost:3000/products
-# X-Cache: HIT ⚡
+# X-Cache: HIT
 ```
 
 ### Limpiar Caché
@@ -45,7 +45,7 @@ curl http://localhost:3000/products
 node dist/cli.js --clear-cache
 ```
 
-## 📊 Endpoints Especiales
+## Endpoints Especiales
 
 ```bash
 # Ver estadísticas de caché
@@ -55,7 +55,7 @@ curl http://localhost:3000/__cache-stats
 curl http://localhost:3000/__clear-cache
 ```
 
-## ⚙️ Configuración
+## Configuración
 
 ### Variables de Entorno
 
@@ -76,7 +76,7 @@ private readonly cache = new NodeCache({
 });
 ```
 
-## 📝 Comandos
+## Comandos
 
 ```bash
 # Desarrollo
@@ -93,7 +93,7 @@ pnpm run lint
 pnpm run test
 ```
 
-## 🔧 Opciones CLI
+## Opciones CLI
 
 | Opción          | Alias | Descripción                |
 | --------------- | ----- | -------------------------- |
@@ -102,7 +102,7 @@ pnpm run test
 | `--clear-cache` | `-c`  | Limpiar caché              |
 | `--help`        | `-h`  | Mostrar ayuda              |
 
-## 📂 Estructura
+## Estructura
 
 ```
 src/
@@ -116,7 +116,7 @@ src/
 └── main.ts                         # Aplicación NestJS
 ```
 
-## 💡 Ejemplos
+## Ejemplos
 
 ### Ejemplo 1: API de productos
 
@@ -140,7 +140,7 @@ curl "http://localhost:3000/products?limit=5"
 curl http://localhost:3000/__cache-stats | jq
 ```
 
-## 🐛 Solución de Problemas
+## Solución de Problemas
 
 ### Puerto en uso
 
@@ -160,17 +160,9 @@ node dist/cli.js --port 3001 --origin http://dummyjson.com
 --origin http://dummyjson.com
 ```
 
-## 🛠️ Tecnologías
+## Tecnologías
 
 - **NestJS** - Framework backend
 - **Axios** - Cliente HTTP
 - **node-cache** - Sistema de caché en memoria
 - **TypeScript** - Lenguaje tipado
-
-## 📄 Licencia
-
-MIT
-
----
-
-**¿Necesitas ayuda?** Abre un issue en GitHub o revisa la documentación de NestJS.
